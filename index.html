@@ -10,9 +10,187 @@
 <body>
 
   <style>
+    /* Colors
+      #0074B8 (blue)
+      #00AD62 (green)
+      #FFFF00 (yellow)
+      #8EC650 (light green)
+    */
+
+    /* General Styling */
+    h1 {
+      font-family: Helvetica, sans-serif;
+    }
+
+    /* Utility Classes */
+    .block {
+      display: block;
+    }
+    .bg-blue {
+      background-color: #0074b866;
+    }
+    .bg-green {
+      background-color: #00ad6266;
+    }
+    .bg-yellow {
+      background-color: #ffff0066;
+    }
+    .bg-light-green {
+      background-color: #8ec65066;
+    }
+    .center {
+      text-align: center;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .full-height {
+      height: 100%;
+    }
+    .full-width {
+      width: 100%;
+    }
+    .pos-absolute {
+      position: absolute;
+    }
+    .pos-relative {
+      position: relative;
+    }
+    .text-blue {
+      color: #0074B8;
+    }
+
+    /* Element Specific Styling (BEM) */
+    .hero {
+      position: relative;
+      align-items: center;
+    }
+    .hero__text {
+      position: absolute;
+      width: 100%;
+      z-index: 9;
+    }
+    .hero__text h1 {
+      flex-wrap: wrap;
+      font-size: 16vw;
+      line-height: .85;
+      color: #fff;
+    }
+    .hero__boxes {
+      flex-wrap: wrap;
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+    .hero__boxes > * {
+      width: 50%;
+    }
+    .hero__boxes img {
+      max-width: 100%;
+      height: auto;
+      z-index: -1;
+    }
+    /* Pseudos -- dark stripes across pics */
+    .hero__boxes > *::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      background-color: rgba(0,0,0,0.12);
+      bottom: 0;
+    }
+    .hero__boxes > *:first-child::after,
+    .hero__boxes > *:nth-child(2)::after {
+      height: 33.33%;
+    }
+    .hero__boxes > *:nth-child(3)::after,
+    .hero__boxes > *:nth-child(4)::after {
+      height: 66.66%;
+    }
+
+    /* Breakpoint for medium sized desktop screen */
+    @media only screen and (min-width: 960px) {
+      .hero {
+        flex-direction: column;
+      }
+      .hero__text {
+        position: relative;
+        transform: translate(0,-62.5%);
+      }
+      .hero__text h1 {
+        font-size: 9.75em;
+      }
+      .hero__boxes {
+        height: 575px;
+      }
+      .hero__boxes > * {
+        width: 25%;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .hero__boxes > *:first-child::before,
+      .hero__boxes > *:nth-child(2)::before,
+      .hero__boxes > *:nth-child(3)::before,
+      .hero__boxes > *:nth-child(4)::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        background-color: rgba(0,0,0,0.12);
+        bottom: 0;
+        height: 66.66%;
+      }
+      .hero__boxes > *:first-child::after,
+      .hero__boxes > *:nth-child(2)::after,
+      .hero__boxes > *:nth-child(3)::after,
+      .hero__boxes > *:nth-child(4)::after {
+        height: 33.33%;
+      }
+      .hero__boxes > *:first-child {
+        background-image: url('assets/hero-faces-1.jpg');
+      }
+      .hero__boxes > *:nth-child(2) {
+        background-image: url('assets/hero-faces-2.jpg');
+      }
+      .hero__boxes > *:nth-child(3) {
+        background-image: url('assets/hero-faces-3.jpg');
+      }
+      .hero__boxes > *:nth-child(4) {
+        background-image: url('assets/hero-faces-4.jpg');
+      }
+      .hero__boxes img {
+        opacity: 0;
+      }
+    }
   </style>
   
   <main>
+    <div class="hero flex-center">
+      <div class="hero__boxes flex">
+        <div class="hero__box flex pos-relative">
+          <img alt="Human Person Looking At Camera" src="assets/hero-faces-1.jpg">
+          <div class="hero__box-overlay bg-blue full-width full-height pos-absolute"></div>
+        </div>
+        <div class="hero__box flex pos-relative">
+          <img alt="Human Person Looking At Camera" src="assets/hero-faces-2.jpg">
+          <div class="hero__box-overlay bg-green full-width full-height pos-absolute"></div>
+        </div>
+        <div class="hero__box flex pos-relative">
+          <img alt="Human Person Looking At Camera" src="assets/hero-faces-3.jpg">
+          <div class="hero__box-overlay bg-yellow full-width full-height pos-absolute"></div>
+        </div>
+        <div class="hero__box flex pos-relative">
+          <img alt="Human Person Looking At Camera" src="assets/hero-faces-4.jpg">
+          <div class="hero__box-overlay bg-light-green full-width full-height pos-absolute"></div>
+        </div>
+      </div>
+      <div class="hero__text">
+        <h1 class="center flex-center"><span class="block full-width">Equity</span><span class="block full-width text-blue">In Action</span></h1>
+      </div>
+    </div>
   </main>
 
 </body>
