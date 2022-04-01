@@ -5,21 +5,16 @@
 <head>
   <title>Unity Code Assessment</title>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
 
   <style>
-    /* Colors
-      #0074B8 (blue)
-      #00AD62 (green)
-      #FFFF00 (yellow)
-      #8EC650 (light green)
-    */
-
-    /* General Styling */
-    h1 {
-      font-family: Helvetica, sans-serif;
+    /* Import font */
+    @font-face {
+      font-family: 'FreeSans';
+      src: url('assets/fonts/FreeSansBold.ttf');
     }
 
     /* Utility Classes */
@@ -38,6 +33,11 @@
     .bg-light-green {
       background-color: #8ec65066;
     }
+    .bg-cov-ctr {
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
     .center {
       text-align: center;
     }
@@ -55,6 +55,12 @@
     .full-width {
       width: 100%;
     }
+    .free-sans {
+      font-family: 'FreeSans', sans-serif;
+    }
+    .grid {
+      display: grid;
+    }
     .pos-absolute {
       position: absolute;
     }
@@ -64,37 +70,46 @@
     .text-blue {
       color: #0074B8;
     }
+    .text-white {
+      color: #fff;
+    }
 
     /* Element Specific Styling (BEM) */
     .hero {
-      position: relative;
       align-items: center;
     }
     .hero__text {
-      position: absolute;
-      width: 100%;
+      align-items: center;
       z-index: 9;
     }
     .hero__text h1 {
+      margin: 0;
       flex-wrap: wrap;
       font-size: 16vw;
-      line-height: .85;
-      color: #fff;
+      line-height: .75;
+    }
+    .hero__text h1 > span:first-child {
+      align-self: flex-end;
     }
     .hero__boxes {
-      flex-wrap: wrap;
+      grid-template: repeat(2,1fr) / repeat(2,1fr);
       max-width: 1024px;
       margin: 0 auto;
     }
-    .hero__boxes > * {
-      width: 50%;
+    .hero__boxes > *:first-child {
+      background-image: url('assets/images/hero-faces-1.jpg');
     }
-    .hero__boxes img {
-      max-width: 100%;
-      height: auto;
-      z-index: -1;
+    .hero__boxes > *:nth-child(2) {
+      background-image: url('assets/images/hero-faces-2.jpg');
     }
-    /* Pseudos -- dark stripes across pics */
+    .hero__boxes > *:nth-child(3) {
+      background-image: url('assets/images/hero-faces-3.jpg');
+    }
+    .hero__boxes > *:nth-child(4) {
+      background-image: url('assets/images/hero-faces-4.jpg');
+    }
+
+    /* Pseudos -- stripes across pics */
     .hero__boxes > *::after {
       content: '';
       position: absolute;
@@ -102,40 +117,46 @@
       background-color: rgba(0,0,0,0.12);
       bottom: 0;
     }
-    .hero__boxes > *:first-child::after,
-    .hero__boxes > *:nth-child(2)::after {
-      height: 33.33%;
-    }
-    .hero__boxes > *:nth-child(3)::after,
-    .hero__boxes > *:nth-child(4)::after {
-      height: 66.66%;
+
+    @media only screen and (max-width: 767px) {
+      .hero__boxes > * {
+        height: 62vw;
+      }
+      .hero__text h1 {
+        transform: translate(0,-3.75%);
+      }
+
+      /* Pseudos -- mobile */
+      .hero__boxes > *:first-child::after,
+      .hero__boxes > *:nth-child(2)::after {
+        height: 33.33%;
+      }
+      .hero__boxes > *:nth-child(3)::after,
+      .hero__boxes > *:nth-child(4)::after {
+        height: 66.66%;
+      }
     }
 
-    /* Breakpoint for medium sized desktop screen */
-    @media only screen and (min-width: 960px) {
+    /* Breakpoint for desktop screen */
+    @media only screen and (min-width: 768px) {
       .hero {
         flex-direction: column;
       }
+      .hero__boxes {
+        grid-template: 1fr / repeat(4,1fr);
+        height: 55vw;
+        max-height: 575px;
+      }
       .hero__text {
         position: relative;
-        transform: translate(0,-62.5%);
+        transform: translate(0,-73%);
       }
       .hero__text h1 {
-        font-size: 9.75em;
+        font-size: clamp(7em, 15vw, 9.75em);
       }
-      .hero__boxes {
-        height: 575px;
-      }
-      .hero__boxes > * {
-        width: 25%;
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-      .hero__boxes > *:first-child::before,
-      .hero__boxes > *:nth-child(2)::before,
-      .hero__boxes > *:nth-child(3)::before,
-      .hero__boxes > *:nth-child(4)::before {
+
+      /* Pseudos -- Desktop */
+      .hero__boxes > *::before {
         content: '';
         position: absolute;
         width: 100%;
@@ -143,52 +164,33 @@
         bottom: 0;
         height: 66.66%;
       }
-      .hero__boxes > *:first-child::after,
-      .hero__boxes > *:nth-child(2)::after,
-      .hero__boxes > *:nth-child(3)::after,
-      .hero__boxes > *:nth-child(4)::after {
+      .hero__boxes > *::after {
         height: 33.33%;
-      }
-      .hero__boxes > *:first-child {
-        background-image: url('assets/hero-faces-1.jpg');
-      }
-      .hero__boxes > *:nth-child(2) {
-        background-image: url('assets/hero-faces-2.jpg');
-      }
-      .hero__boxes > *:nth-child(3) {
-        background-image: url('assets/hero-faces-3.jpg');
-      }
-      .hero__boxes > *:nth-child(4) {
-        background-image: url('assets/hero-faces-4.jpg');
-      }
-      .hero__boxes img {
-        opacity: 0;
       }
     }
   </style>
   
   <main>
-    <div class="hero flex-center">
-      <div class="hero__boxes flex">
-        <div class="hero__box flex pos-relative">
-          <img alt="Human Person Looking At Camera" src="assets/hero-faces-1.jpg">
+    <div class="hero flex-center pos-relative">
+      <div class="hero__boxes full-width grid">
+        <div class="hero__box bg-cov-ctr flex full-width pos-relative">
           <div class="hero__box-overlay bg-blue full-width full-height pos-absolute"></div>
         </div>
-        <div class="hero__box flex pos-relative">
-          <img alt="Human Person Looking At Camera" src="assets/hero-faces-2.jpg">
+        <div class="hero__box bg-cov-ctr flex full-width pos-relative">
           <div class="hero__box-overlay bg-green full-width full-height pos-absolute"></div>
         </div>
-        <div class="hero__box flex pos-relative">
-          <img alt="Human Person Looking At Camera" src="assets/hero-faces-3.jpg">
+        <div class="hero__box bg-cov-ctr flex full-width pos-relative">
           <div class="hero__box-overlay bg-yellow full-width full-height pos-absolute"></div>
         </div>
-        <div class="hero__box flex pos-relative">
-          <img alt="Human Person Looking At Camera" src="assets/hero-faces-4.jpg">
+        <div class="hero__box bg-cov-ctr flex full-width pos-relative">
           <div class="hero__box-overlay bg-light-green full-width full-height pos-absolute"></div>
         </div>
       </div>
-      <div class="hero__text">
-        <h1 class="center flex-center"><span class="block full-width">Equity</span><span class="block full-width text-blue">In Action</span></h1>
+      <div class="hero__text full-height full-width grid pos-absolute">
+        <h1 class="center flex free-sans full-height">
+          <span class="block full-width text-white">Equity</span>
+          <span class="block full-width text-blue">In Action</span>
+        </h1>
       </div>
     </div>
   </main>
