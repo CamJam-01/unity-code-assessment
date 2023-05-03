@@ -12,4 +12,4 @@ Use only index.html and front-end languages (HTML, CSS)
 ## Notes
 I focused on leaning more heavily on utility classes in lieu of targeting specific elements.
 
-**https://camjamasaurus.github.io/unity-code-assessment/**
+**https://camjam-01.github.io/unity-code-assessment/**
